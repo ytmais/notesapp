@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CatatanKu — Kontainer Kegiatan Harian</title>
+  <meta name="description" content="Aplikasi catatan harian yang simpel, cepat, dan aman. Catat semua kegiatanmu setiap hari dengan timestamp presisi hingga detik.">
+
+  <!-- Security: Content Security Policy (compatible with file:// and local servers) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file: http: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com file:; font-src https://fonts.gstatic.com; script-src 'self' file:; img-src 'self' data: file:; connect-src 'self';">
+
+  <!-- Favicon (emoji-based inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ====== Background Orbs ====== -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ====== LANDING PAGE ====== -->
+  <section id="landing-page">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        100% Gratis &bull; Data Tersimpan Lokal
+      </div>
+
+      <h1>
+        Catat Semua<br>
+        <span class="gradient-text">Kegiatanmu.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Kontainer kegiatan harianmu yang simpel, cepat, dan aman.
+        Semua catatan tersimpan langsung di perangkatmu — tanpa akun, tanpa server.
+      </p>
+
+      <div class="hero-cta">
+        <button id="start-btn" class="btn btn-primary">
+          ✨ Mulai Sekarang
+        </button>
+        <a href="#cara-kerja" class="btn btn-ghost">
+          📖 Cara Kerja
+        </a>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="chevron"></div>
+      </div>
+    </div>
+
+    <!-- Cara Kerja / Features -->
+    <div class="features-section" id="cara-kerja">
+      <div class="section-label">Cara Kerja</div>
+      <h2 class="section-title">Semudah 3 Langkah</h2>
+      <p class="section-desc">
+        Tidak perlu daftar akun, tidak perlu internet, tidak perlu ribet. Langsung pakai!
+      </p>
+
+      <div class="features-grid">
+        <!-- Step 1 -->
+        <div class="feature-card">
+          <span class="feature-step">Langkah 1</span>
+          <div class="feature-icon">📝</div>
+          <h3>Tulis Catatan</h3>
+          <p>
+            Klik tombol <strong>"Buat Catatan"</strong>, tulis judul dan isinya.
+            Pilih kategori seperti Pekerjaan, Belajar, Belanja, atau Pribadi.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="feature-card">
+          <span class="feature-step">Langkah 2</span>
+          <div class="feature-icon">🕐</div>
+          <h3>Otomatis Tercatat Waktunya</h3>
+          <p>
+            Setiap catatan otomatis dicatat <strong>tanggal dan waktunya hingga detik</strong>.
+            Kamu bisa tahu persis kapan setiap catatan dibuat dan terakhir diubah.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="feature-card">
+          <span class="feature-step">Langkah 3</span>
+          <div class="feature-icon">🔍</div>
+          <h3>Cari & Kelola</h3>
+          <p>
+            Cari catatan dengan kata kunci, filter berdasarkan kategori,
+            atau urutkan berdasarkan waktu. <strong>Edit dan hapus</strong> kapan saja.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====== DASHBOARD ====== -->
+  <section id="dashboard" class="hidden">
+
+    <!-- Header -->
+    <header class="dash-header">
+      <div class="dash-header-inner">
+        <div class="dash-brand">
+          <button id="back-to-landing" class="back-btn" title="Kembali ke halaman utama" aria-label="Kembali">←</button>
+          <h2>📝 CatatanKu <span id="note-count" class="note-count">0</span></h2>
+        </div>
+        <button id="new-note-btn" class="btn btn-primary btn-sm">
+          ＋ Buat Catatan
+        </button>
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+      <div class="search-wrapper">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Cari catatan..."
+          autocomplete="off"
+          maxlength="200"
+        >
+      </div>
+
+      <select id="category-filter" class="filter-select" aria-label="Filter kategori">
+        <option value="semua">📁 Semua Kategori</option>
+        <option value="umum">📋 Umum</option>
+        <option value="pekerjaan">💼 Pekerjaan</option>
+        <option value="belajar">📚 Belajar</option>
+        <option value="belanja">🛒 Belanja</option>
+        <option value="ide">💡 Ide</option>
+        <option value="pribadi">❤️ Pribadi</option>
+      </select>
+
+      <select id="sort-filter" class="filter-select" aria-label="Urutkan">
+        <option value="newest">🕐 Terbaru</option>
+        <option value="oldest">🕐 Terlama</option>
+        <option value="az">🔤 A → Z</option>
+        <option value="za">🔤 Z → A</option>
+      </select>
+    </div>
+
+    <!-- Notes Grid -->
+    <div id="notes-grid" class="notes-grid">
+      <!-- Cards rendered by JS -->
+    </div>
+
+  </section>
+
+  <!-- ====== NOTE MODAL ====== -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-title">Catatan Baru</h2>
+        <button id="modal-close-btn" class="modal-close" aria-label="Tutup">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Timestamp info (shown in edit mode) -->
+        <div id="modal-meta" class="form-meta hidden">
+          <span class="meta-icon">🕐</span>
+          <span id="modal-meta-text"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="note-title-input">Judul</label>
+          <input
+            type="text"
+            id="note-title-input"
+            class="form-input"
+            placeholder="Judul catatan..."
+            maxlength="200"
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="note-content-input">Isi Catatan</label>
+          <textarea
+            id="note-content-input"
+            class="form-textarea"
+            placeholder="Tulis catatanmu di sini..."
+            maxlength="50000"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="note-category-select">Kategori</label>
+          <select id="note-category-select" class="form-select">
+            <option value="umum">📋 Umum</option>
+            <option value="pekerjaan">💼 Pekerjaan</option>
+            <option value="belajar">📚 Belajar</option>
+            <option value="belanja">🛒 Belanja</option>
+            <option value="ide">💡 Ide</option>
+            <option value="pribadi">❤️ Pribadi</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="delete-note-btn" class="btn btn-danger btn-sm hidden">🗑 Hapus</button>
+        <div style="flex:1"></div>
+        <button id="cancel-note-btn" class="btn btn-ghost btn-sm">Batal</button>
+        <button id="save-note-btn" class="btn btn-primary btn-sm">💾 Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== TOAST CONTAINER ====== -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- ====== SCRIPTS ====== -->
+  <script src="js/security.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
